@@ -2,7 +2,44 @@ import React from 'react';
 import './Feed.scss';
 
 class NewUser extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      avatar: "",
+      username: "",
+      email: "",
+    }
+  }
+
+  setName(event) {
+    const { value } = event.target;
+
+    this.setState({ name: value });
+  }
+
+  setAvatar(event) {
+    const { value } = event.target;
+
+    this.setState({ avatar: value });
+  }
+
+  setUserName(event) {
+    const { value } = event.target;
+
+    this.setState({ username: value });
+  }
+
+  setEmail(event) {
+    const { value } = event.target;
+
+    this.setState({ email: value });
+  }
+
   render() {
+    const { name } = this.state;
+
     return (
       <div className="container">
         <section className="feed">
@@ -16,7 +53,7 @@ class NewUser extends React.Component {
                 <img src="http://placehold.it/200x200" alt="" />
               </div>
 
-              <p className="user__name">Codenation</p>
+              <p className="user__name">{name}</p>
             </div>
 
             <div className="post__form">
@@ -24,6 +61,7 @@ class NewUser extends React.Component {
               <input
                 type="text"
                 placeholder="Ex: Fulano da Silva"
+                onChange={(event) => this.setName(event)}
               />
 
               <label>Usuário</label>
