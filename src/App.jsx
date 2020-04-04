@@ -1,61 +1,27 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Feed from './routes/Feed';
 import Topbar from './components/Topbar';
 
 import './App.scss';
 
-// Pensar nos estados -- ok
-// Pegar a lista de usuários --ok
-// Guardar lista de usuários no estado de APP --ok
-// Iterar sobre a lista de usuários pegandos os IDs e fazer requisições dos posts de cada um.
-// Guardar no estado a lista de posts;
-
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: [],
-      posts: [],
-      usersFetched: 0,
-    }
-  }
-
-  componentDidMount() {
-    const usersList = fetch('https://5e7d0266a917d70016684219.mockapi.io/api/v1/users');
-
-    usersList
-      .then((res) => res.json())
-      .then(dados => this.setState({ users:  dados }));
-  }
-
-  componentDidUpdate() {
-    const { users, posts, usersFetched } = this.state;
-
-    if (usersFetched === users.length) {
-      return;
-    }
-
-    fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${users[usersFetched].id}/posts`)
-      .then((res) => res.json())
-      .then(dados => this.setState({
-        posts: [...posts, ...dados],
-        usersFetched: usersFetched + 1,
-        loading: false,
-      }))
-  }
-
   render() {
-    const { users, posts } = this.state;
-
     return (
-      <React.Fragment>
+      <BrowserRouter>
         <Topbar />
 
-        <Feed posts={posts} users={users} />
+        <Switch>
+          <Route exact path="/">
+            <Feed />
+          </Route>
 
-      </React.Fragment>
+          <Route path="/newuser">
+            <h2>Olá novo usuário</h2>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     )
   }
 }

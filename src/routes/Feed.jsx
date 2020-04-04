@@ -5,14 +5,48 @@ import Post from '../components/Post';
 import './Feed.scss';
 
 class Feed extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      users: [],
+      posts: [],
+      usersFetched: 0,
+    }
+  }
+
+  componentDidMount() {
+    const usersList = fetch('https://5e7d0266a917d70016684219.mockapi.io/api/v1/users');
+
+    usersList
+      .then((res) => res.json())
+      .then(dados => this.setState({ users:  dados }));
+  }
+
+  componentDidUpdate() {
+    const { users, posts, usersFetched } = this.state;
+
+    if (usersFetched === users.length) {
+      return;
+    }
+
+    fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${users[usersFetched].id}/posts`)
+      .then((res) => res.json())
+      .then(dados => this.setState({
+        posts: [...posts, ...dados],
+        usersFetched: usersFetched + 1,
+        loading: false,
+      }))
+  }
+
   getUserPostById(postUserId) {
-    const { users } = this.props;
+    const { users } = this.state;
 
     return users.find(user => postUserId === user.id);
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts } = this.state;
 
     return (
       <div className="container">
