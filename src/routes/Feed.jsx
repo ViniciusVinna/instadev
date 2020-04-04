@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Post from '../components/Post';
+import Loading from '../components/Loading';
 
 import './Feed.scss';
 
@@ -59,7 +60,7 @@ class Feed extends React.Component {
                 infoUsuario={this.getUserPostById(cadaPost.userId)}
               />
             ))
-            : <h2> Não há nenhum post no feed <span role="img" aria-label="Emoji Triste">😭</span>!</h2>
+            : <Loading />
           }
         </section>
       </div>

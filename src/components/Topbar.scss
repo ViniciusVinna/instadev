@@ -24,6 +24,20 @@
   height: 100%;
 }
 
-.topbar__icon {
+.topbar__group {
+  display: flex;
+}
+
+.topbar__icon,
+.topbar__icon a {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   font-size: 1.6rem;
+  margin: auto 1rem;
+  justify-content: center;
+
+  span {
+    font-size: 1.1rem;
+  }
 }
