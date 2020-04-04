@@ -1,7 +1,8 @@
 import React from 'react';
+
+import Feed from './routes/Feed';
 import Topbar from './components/Topbar';
-import Feed from './components/Feed';
-import Loading from './components/Loading';
+
 import './App.scss';
 
 // Pensar nos estados -- ok
@@ -17,7 +18,6 @@ class App extends React.Component {
     this.state = {
       users: [],
       posts: [],
-      loading: true,
       usersFetched: 0,
     }
   }
@@ -47,16 +47,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { users, posts, loading } = this.state;
+    const { users, posts } = this.state;
 
     return (
       <React.Fragment>
         <Topbar />
 
-        { loading
-          ? <Loading />
-          : <Feed posts={posts} users={users} />
-        }
+        <Feed posts={posts} users={users} />
 
       </React.Fragment>
     )

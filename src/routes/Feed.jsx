@@ -1,6 +1,8 @@
 import React from 'react';
+
+import Post from '../components/Post';
+
 import './Feed.scss';
-import Post from './Post';
 
 class Feed extends React.Component {
   getUserPostById(postUserId) {

@@ -48,6 +48,9 @@ class Post extends React.Component {
 
           <button className="post__control">
             <i className="far fa-comment" />
+            <span className="comments__counter">
+              {infoPost.comments.length}
+            </span>
           </button>
 
           <button className="post__control">
@@ -55,17 +58,21 @@ class Post extends React.Component {
           </button>
         </nav>
 
-        <div className="post__status">
-          <div className="user">
-            <a href="#" className="user__thumb">
-              <img src="assets/img/profiles/domino/domino-profile.jpg" alt=""/>
-            </a>
+        {infoPost.comments.length > 0 && (
+          <div className="post__status">
+            <div className="user">
+              <a href="#" className="user__thumb">
+                <img src={infoPost.comments[0].avatar} alt=""/>
+              </a>
 
-            <span>
-              curtido por <a href="#">Domino</a> e outras <a href="#">7 pessoas</a>
+              <span>
+              comentado por <a href="#">{infoPost.comments[0].name}</a> e outras <a href="#">
+                {infoPost.comments.length - 1} pessoa(s).
+              </a>
             </span>
+            </div>
           </div>
-        </div>
+        )}
       </article>
     )
   }
