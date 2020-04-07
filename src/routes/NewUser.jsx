@@ -15,6 +15,7 @@ class NewUser extends React.Component {
   }
 
   setName(event) {
+    console.log(this);
     const { value } = event.target;
 
     this.setState({ name: value });
